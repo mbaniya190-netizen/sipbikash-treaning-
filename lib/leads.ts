@@ -21,7 +21,7 @@ function getGoogleConfiguration() {
     spreadsheetId: process.env.GOOGLE_SHEETS_ID as string,
     clientEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL as string,
     privateKey: (process.env.GOOGLE_PRIVATE_KEY as string).replace(/\\n/g, "\n"),
-    sheetName: process.env.GOOGLE_SHEETS_TAB || "Leads",
+    sheetName: process.env.GOOGLE_SHEETS_TAB || "Sheet 1",
   };
 }
 
