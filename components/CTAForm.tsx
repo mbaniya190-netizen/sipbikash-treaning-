@@ -44,6 +44,8 @@ export default function CTAForm() {
       });
 
       if (!response.ok) throw new Error("Lead submission failed");
+      if (typeof window !== "undefined" && typeof window.fbq === "function") {
+        {  window.fbq("track", "Lead");}
       router.push("/thank-you");
     } catch {
       setSubmitError(text.requestFailed);
