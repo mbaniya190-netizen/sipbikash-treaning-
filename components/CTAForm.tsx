@@ -1,4 +1,9 @@
 "use client";
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -45,7 +50,8 @@ export default function CTAForm() {
 
       if (!response.ok) throw new Error("Lead submission failed");
       if (typeof window !== "undefined" && typeof window.fbq === "function") {
-        {  window.fbq("track", "Lead");}
+          window.fbq("track", "Lead");
+          }
       router.push("/thank-you");
     } catch {
       setSubmitError(text.requestFailed);
