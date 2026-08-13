@@ -20,6 +20,15 @@ export async function POST(request: Request) {
     }
 
     await appendLead({ name, phone });
+    const metaAccessToken = process.env.META_ACCESS_TOKEN;
+    const datasetId = process.env.META_DATASET_ID;
+    console.log("Meta CAPI config:", !!metaAccessToken, !!datasetId);
+    const eventId = crypto.randomUUID();
+    console.log("Event ID:", eventId);
+    
+    if (metaAccessToken && datasetId) {
+  console.log("Ready to send CAPI event");
+}
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error) {
     console.error("Lead submission failed", error);
