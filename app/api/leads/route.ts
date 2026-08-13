@@ -27,8 +27,8 @@ export async function POST(request: Request) {
     const eventId = crypto.randomUUID();
     console.log("Event ID:", eventId);
     
-    if (metaAccessToken && datasetId) {
-  await fetch(
+   if (metaAccessToken && datasetId) {
+  const response = await fetch(
     `https://graph.facebook.com/v23.0/${datasetId}/events?access_token=${metaAccessToken}`,
     {
       method: "POST",
@@ -47,6 +47,9 @@ export async function POST(request: Request) {
       }),
     }
   );
+
+  const result = await response.text();
+  console.log("Meta CAPI Response:", result);
 }
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error) {
