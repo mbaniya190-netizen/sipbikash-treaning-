@@ -28,8 +28,25 @@ export async function POST(request: Request) {
     console.log("Event ID:", eventId);
     
     if (metaAccessToken && datasetId) {
-  console.log("Ready to send CAPI event");
-  console.log("Dataset:", datasetId);
+  await fetch(
+    `https://graph.facebook.com/v23.0/${datasetId}/events?access_token=${metaAccessToken}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: [
+          {
+            event_name: "Lead",
+            event_time: Math.floor(Date.now() / 1000),
+            event_id: eventId,
+            action_source: "website",
+          },
+        ],
+      }),
+    }
+  );
 }
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error) {
