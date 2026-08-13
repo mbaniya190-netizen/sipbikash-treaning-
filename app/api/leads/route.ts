@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { appendLead } from "@/lib/leads";
+import crypto from "crypto";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -28,6 +29,7 @@ export async function POST(request: Request) {
     
     if (metaAccessToken && datasetId) {
   console.log("Ready to send CAPI event");
+  console.log("Dataset:", datasetId);
 }
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error) {
